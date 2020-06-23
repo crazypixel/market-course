@@ -1,25 +1,42 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import styled from 'styled-components';
+
+const fetchFromServer = () => console.log('fetch...');
+const saveInServer = value => { console.log('save...')};
 
 const App = () => {
 	const [items, setItems] = useState(['Milk', 'Eggs']);
 	const [value, setValue] = useState('');
+	const [mounted, setMounted] = useState(false);
 	
-	const handleChange = e => {
+	useEffect(() => {
+		fetchFromServer();
+	}, []);
+	
+	useEffect(() => {
+		if (mounted) {
+			saveInServer(items);
+		}
+	}, [items, mounted]);
+	
+	const handleChange = useCallback(e => {
 		setValue(e.target.value);
-	};
+	}, []);
 	
-	const handleKeyDown = event => {
+	const handleKeyDown = useCallback(event => {
 		if (event.which === 13) {
 			setItems([...items, value]);
 		}
-	};
+	}, [items, value]);
 	
 	return (
 		<Container>
 			<Card>
 				<Title>My List</Title>
-				<Input onChange={handleChange} onKeyDown={handleKeyDown} />
+				<Input
+					onChange={handleChange}
+					onKeyDown={handleKeyDown}
+				/>
 				
 				{
 					items.map(item => (
