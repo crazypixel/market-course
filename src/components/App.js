@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch
+} from 'react-router-dom';
 
 // components
 import Progress from './Progress';
 import ShoppingList from './ShoppingList';
+import Users from './Users';
 
 const App = () => {
 	return (
@@ -17,6 +22,10 @@ const App = () => {
 					
 					<Route exact path="/progress">
 						<Progress/>
+					</Route>
+					
+					<Route exact path="/users/:id?">
+						<Users />
 					</Route>
 					
 					<Route exact path="*">

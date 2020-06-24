@@ -1,6 +1,6 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import styled from 'styled-components';
-import {useLocation, useHistory, useParams} from 'react-router-dom';
+import {useHistory, Link, useLocation} from 'react-router-dom';
 
 const fetchFromServer = () => console.log('fetch...');
 const saveInServer = value => {
@@ -8,11 +8,12 @@ const saveInServer = value => {
 };
 
 const ShoppingList = props => {
-	console.log(props);
+	const history = useHistory();
+	const location = useLocation();
 	const [items, setItems] = useState(['Milk', 'Eggs']);
 	const [value, setValue] = useState('');
 	const [mounted, setMounted] = useState(false);
-	
+	console.log(location);
 	useEffect(() => {
 		fetchFromServer();
 	}, []);
@@ -33,8 +34,15 @@ const ShoppingList = props => {
 		}
 	}, [items, value]);
 	
+	const navigateToProgress = () => {
+		history.push('/progress');
+	};
+	
 	return (
 		<Card>
+			<Button onClick={navigateToProgress}>Navigate to progress</Button>
+			<Link to="/progress">Navigate to progress</Link>
+			
 			<Title>My List</Title>
 			<Input
 				onChange={handleChange}
@@ -78,4 +86,14 @@ const Item = styled.div`
 	align-items: center;
 	box-sizing: border-box;
 	padding-left: 20px;
+`;
+
+const Button = styled.div`
+	width: 100%;
+	height: 40px;
+	background: #e0e0e0;
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
 `;
