@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+// import {useSelector, useDispatch} from 'react-redux';
 
 // utils
 import {uuid} from '../utils';
@@ -10,6 +11,9 @@ import Row from './Row';
 import EmptyState from './EmptyState';
 
 const List = () => {
+	// const dispatch = useDispatch();
+	// const state = useSelector(storeState => storeState);
+	
 	const [items, setItems] = useState([
 		{id: uuid(), label: 'Buy Eggs'},
 		{id: uuid(), label: 'Learn Redux'},
