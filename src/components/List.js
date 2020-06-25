@@ -7,6 +7,7 @@ import {uuid} from '../utils';
 // components
 import TextInput from './TextInput';
 import Row from './Row';
+import EmptyState from './EmptyState';
 
 const List = () => {
 	const [items, setItems] = useState([
@@ -21,6 +22,8 @@ const List = () => {
 		<Container>
 			<Title>My List</Title>
 			<TextInput onSubmit={handleSubmit}/>
+			
+			{!items.length && <EmptyState/>}
 			
 			{items.map(item => (
 				<Row

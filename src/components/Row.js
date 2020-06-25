@@ -21,6 +21,12 @@ const Container = styled.div`
   font-size: 14px;
   border-bottom: 1px solid #dadada;
   justify-content: space-between;
+  transition: all 300ms;
+  padding: 0 10px;
+  
+  &:hover {
+  	background: #fafafa;
+  }
   
   &:last-child {
   	border: none;
