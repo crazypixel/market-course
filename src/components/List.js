@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-// import {useSelector, useDispatch} from 'react-redux';
-
-// utils
-import {uuid} from '../utils';
+import {useSelector, useDispatch} from 'react-redux';
+import {addTask, removeTask} from '../redux/actions/todo.actions';
 
 // components
 import TextInput from './TextInput';
@@ -11,16 +9,11 @@ import Row from './Row';
 import EmptyState from './EmptyState';
 
 const List = () => {
-	// const dispatch = useDispatch();
-	// const state = useSelector(storeState => storeState);
+	const dispatch = useDispatch();
+	const items = useSelector(state => state.todo);
 	
-	const [items, setItems] = useState([
-		{id: uuid(), label: 'Buy Eggs'},
-		{id: uuid(), label: 'Learn Redux'},
-	]);
-	
-	const handleSubmit = label => setItems(items.concat({id: uuid(), label}));
-	const removeItem = id => setItems(items.filter(item => item.id !== id));
+	const handleSubmit = label => dispatch(addTask(label));
+	const removeItem = id => dispatch(removeTask(id));
 	
 	return (
 		<Container>
