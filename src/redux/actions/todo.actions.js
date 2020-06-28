@@ -15,7 +15,6 @@ export const fetchTasks = () => ({
 	meta: {
 		baseAction: AT.FETCH_TASKS,
 		method: 'GET',
-		// body: {},
-		url: 'https://run.mocky.io/v3/9f55c346-6573-4039-aa7b-9e04adc0d075',
+		url: '/v1/accounts',
 	}
 });

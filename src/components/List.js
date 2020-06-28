@@ -61,6 +61,6 @@ const Container = styled.div`
 
 const Title = styled.div`
   font-size: 22px;
-  color: ${({primary}) => primary};
+  color: ${({theme}) => theme.a400};
   margin-bottom: 20px;
 `;

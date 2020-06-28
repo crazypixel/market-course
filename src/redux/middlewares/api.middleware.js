@@ -1,4 +1,5 @@
 import * as AT from '../action.types';
+import sdk from '@datorama/sdk';
 
 const apiMiddleware = store => next => action => {
 	if (action.type !== AT.API_REQUEST) {
@@ -15,10 +16,15 @@ const apiMiddleware = store => next => action => {
 	
 	store.dispatch({type: baseAction.PENDING});
 	
-	fetch(url, options)
-		.then(res => res.json())
-		.then(payload => store.dispatch({type: baseAction.SUCCESS, payload}))
-		.catch(payload => store.dispatch({type: baseAction.ERROR, payload}));
+	if (method === 'GET') {
+		sdk.api.get(url, (error, payload) => {
+			if (error) {
+				store.dispatch({type: baseAction.ERROR, payload: error});
+			} else {
+				store.dispatch({type: baseAction.SUCCESS, payload});
+			}
+		});
+	}
 };
 
 export default apiMiddleware;
