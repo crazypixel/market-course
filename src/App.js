@@ -1,17 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {ThemeProvider} from 'styled-components';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 
 // components
 import List from './components/List';
 
+const theme = {
+	primary: 'red'
+};
+
 const App = () => (
-	<Provider store={store}>
-		<Container>
-			<List/>
-		</Container>
-	</Provider>
+	<ThemeProvider theme={theme}>
+		<Provider store={store}>
+			<Container>
+				<List/>
+			</Container>
+		</Provider>
+	</ThemeProvider>
 );
 
 export default App;

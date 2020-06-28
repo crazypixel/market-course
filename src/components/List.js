@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
-import {addTask, removeTask} from '../redux/actions/todo.actions';
+import {addTask, removeTask, fetchTasks} from '../redux/actions/todo.actions';
 
 // components
 import TextInput from './TextInput';
@@ -10,7 +10,13 @@ import EmptyState from './EmptyState';
 
 const List = () => {
 	const dispatch = useDispatch();
+	
+	useEffect(() => {
+		dispatch(fetchTasks());
+	}, [dispatch]);
+	
 	const items = useSelector(state => state.todo);
+	const settings = useSelector(state => state.settings);
 	
 	const handleSubmit = label => dispatch(addTask(label));
 	const removeItem = id => dispatch(removeTask(id));
@@ -55,6 +61,6 @@ const Container = styled.div`
 
 const Title = styled.div`
   font-size: 22px;
-  color: #444;
+  color: ${({primary}) => primary};
   margin-bottom: 20px;
 `;
